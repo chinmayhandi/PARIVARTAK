@@ -40,11 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Contact Form Submission (WhatsApp Integration)
+  // Contact Form Submission (EmailJS Integration)
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({
+        publicKey: "hzA3NAoEIoNA6My6l"
+      });
+    }
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
       
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
@@ -52,23 +61,35 @@ document.addEventListener('DOMContentLoaded', () => {
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value;
       
-      // Format message for WhatsApp
-      const whatsappNumber = "918884445983";
-      let whatsappMessage = `*New Inquiry from Parivartak Website*%0A%0A`;
-      whatsappMessage += `*Name:* ${name}%0A`;
-      whatsappMessage += `*Email:* ${email}%0A`;
-      whatsappMessage += `*Phone:* ${phone}%0A`;
-      whatsappMessage += `*Subject:* ${subject}%0A`;
-      whatsappMessage += `*Message:* ${message}`;
+      // Disable submit button while sending
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      formMessage.style.display = 'none';
       
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
-      
-      // Open WhatsApp in new tab
-      window.open(whatsappUrl, '_blank');
-      
-      // Reset form
-      contactForm.reset();
-      alert('Thank you! You are being redirected to WhatsApp to complete your message.');
+      emailjs.send("service_2abnifr", "template_d1mri9i", {
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject,
+        message: message
+      })
+      .then(function(response) {
+         formMessage.textContent = "Thank you! Your enquiry has been sent successfully.";
+         formMessage.style.color = "#155724";
+         formMessage.style.backgroundColor = "#d4edda";
+         formMessage.style.display = "block";
+         contactForm.reset();
+         submitBtn.disabled = false;
+         submitBtn.textContent = 'Send Message';
+      }, function(error) {
+         console.error("EmailJS Error:", error);
+         formMessage.textContent = "Sorry, message not sent. Please try again or contact us on WhatsApp. (" + (error.text || "Unknown Error") + ")";
+         formMessage.style.color = "#721c24";
+         formMessage.style.backgroundColor = "#f8d7da";
+         formMessage.style.display = "block";
+         submitBtn.disabled = false;
+         submitBtn.textContent = 'Send Message';
+      });
     });
   }
 });
