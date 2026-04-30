@@ -2,8 +2,8 @@
 
 :root {
   /* Color Palette */
-  --color-primary: #0F5132; /* Dark Green */
-  --color-primary-light: #198754;
+  --color-primary: #1e8e3e; /* Green */
+  --color-primary-light: #146c2e;
   --color-secondary: #FFC107; /* Yellow */
   --color-secondary-hover: #E0A800;
   --color-white: #FFFFFF;
@@ -255,6 +255,19 @@ header.scrolled {
   gap: 8px;
   font-weight: 700;
   color: var(--color-primary);
+  font-size: 16px;
+}
+
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #25D366;
+  font-size: 16px;
+}
+.whatsapp-btn:hover {
+  color: #128C7E;
 }
 
 .phone-btn i {
@@ -262,8 +275,31 @@ header.scrolled {
   font-size: 18px;
 }
 
-.mobile-menu-btn {
+.mobile-controls {
   display: none;
+  align-items: center;
+  gap: 15px;
+}
+
+.mobile-nav-call {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-nav-call:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-white);
+}
+
+.mobile-menu-btn {
   font-size: 24px;
   color: var(--color-dark);
   cursor: pointer;
@@ -417,7 +453,7 @@ header.scrolled {
 /* Services Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
@@ -495,7 +531,7 @@ header.scrolled {
 /* Projects Section */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
@@ -903,8 +939,8 @@ footer {
     display: flex;
   }
   
-  .mobile-menu-btn {
-    display: block;
+  .mobile-controls {
+    display: flex;
   }
   
   .header-actions {
@@ -921,6 +957,10 @@ footer {
   
   .footer-top {
     grid-template-columns: 1fr 1fr;
+  }
+  
+  .services-grid, .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -939,6 +979,23 @@ footer {
   
   .founder-section {
     grid-template-columns: 1fr;
+  }
+  
+  .services-grid, .projects-grid, .contact-wrapper, .features-list {
+    grid-template-columns: 1fr;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .section {
+    padding: 50px 0;
+  }
+  
+  * {
+    animation: none !important;
   }
 }
 

@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message: message
       })
       .then(function(response) {
-         formMessage.textContent = "Thank you! Your enquiry has been sent successfully.";
+         formMessage.textContent = "Thank you! Your enquiry has been sent.";
          formMessage.style.color = "#155724";
          formMessage.style.backgroundColor = "#d4edda";
          formMessage.style.display = "block";
@@ -83,7 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
          submitBtn.textContent = 'Send Message';
       }, function(error) {
          console.error("EmailJS Error:", error);
-         formMessage.textContent = "Sorry, message not sent. Please try again or contact us on WhatsApp. (" + (error.text || "Unknown Error") + ")";
+         formMessage.innerHTML = `Sorry, enquiry limit reached. Please contact us on WhatsApp or call directly.<br><br>
+         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+            <a href="https://wa.me/918884445983" target="_blank" style="padding: 8px 15px; background-color: #25D366; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: none;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="tel:8884445983" style="padding: 8px 15px; background-color: #1e8e3e; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; border: none;">📞 Call</a>
+         </div>`;
          formMessage.style.color = "#721c24";
          formMessage.style.backgroundColor = "#f8d7da";
          formMessage.style.display = "block";
