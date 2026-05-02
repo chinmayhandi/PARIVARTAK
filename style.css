@@ -398,7 +398,7 @@ header.scrolled {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .about-img {
@@ -410,11 +410,14 @@ header.scrolled {
 
 .about-img img {
   width: 100%;
+  height: 250px;
+  object-fit: cover;
   transition: transform 0.5s ease;
+  border-radius: var(--radius-md);
 }
 
 .about-img:hover img {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .about-text h2 {
@@ -453,11 +456,12 @@ header.scrolled {
 /* Services Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
 .service-card {
+  height: 100%;
   background: var(--color-white);
   padding: 40px 30px;
   border-radius: var(--radius-lg);
@@ -465,6 +469,8 @@ header.scrolled {
   text-align: center;
   transition: var(--transition);
   border-bottom: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
@@ -531,16 +537,19 @@ header.scrolled {
 /* Projects Section */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
 .project-card {
+  height: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
   background: var(--color-white);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -958,10 +967,6 @@ footer {
   .footer-top {
     grid-template-columns: 1fr 1fr;
   }
-  
-  .services-grid, .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -981,7 +986,7 @@ footer {
     grid-template-columns: 1fr;
   }
   
-  .services-grid, .projects-grid, .contact-wrapper, .features-list {
+  .contact-wrapper, .features-list {
     grid-template-columns: 1fr;
   }
   
@@ -1025,12 +1030,16 @@ footer {
 
 /* Team Layout */
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   margin-top: 40px;
 }
 .team-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1040,6 +1049,7 @@ footer {
   box-shadow: var(--shadow-md);
   transition: var(--transition);
   margin-top: 0;
+  height: 100%;
 }
 .team-card:hover {
   transform: translateY(-10px);
@@ -1066,7 +1076,7 @@ footer {
 
 /* Services with Images */
 .service-img-container {
-  height: 200px;
+  height: 250px;
   overflow: hidden;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   margin: -40px -30px 25px -30px;
@@ -1097,7 +1107,7 @@ footer {
 }
 .about-split-images img {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -1110,5 +1120,56 @@ footer {
 @media (max-width: 768px) {
   .about-split {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Floating Contact Buttons */
+.floating-contact-btns {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.floating-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: var(--color-white);
+  box-shadow: var(--shadow-lg);
+  pointer-events: auto;
+  transition: var(--transition);
+}
+
+.floating-btn:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.floating-whatsapp {
+  background-color: #25D366;
+}
+
+.floating-phone {
+  background-color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .floating-contact-btns {
+    bottom: 20px;
+    padding: 0 20px;
+  }
+  .floating-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
   }
 }
